@@ -61,4 +61,5 @@ def main():
         write_board_to_file(fname, board_string)
 
 
-main()
+if __name__ == '__main__':
+    main()
