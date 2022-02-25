@@ -12,10 +12,13 @@ num_columns
 num_rows 
 manually
 '''
+
 num_of_boards = 1
 num_columns = 50
 num_rows = 50
 percentOfNonZeros = .01 # float 0-1
+lowestValue = -1
+highestValue = 1
 
 def generate_numbers(board_array):
     for x in range(num_columns):
@@ -24,9 +27,8 @@ def generate_numbers(board_array):
             if (random.randint(0,100)/100 > percentOfNonZeros):
                 board_array[x].append(0)
             else:
-                board_array[x].append(random.randint(-10, 10))
+                board_array[x].append(random.randint(lowestValue, highestValue))
     return board_array
-
 
 def remove_end_spaces(string):
     return "".join(string.rstrip())
