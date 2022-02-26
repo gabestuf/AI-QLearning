@@ -1,5 +1,6 @@
 
 import argparse
+import random
 
 from board import *
 from board_generator import generateBoard
@@ -49,3 +50,7 @@ if __name__ == '__main__':
 
     # board class
     b = Board(args.file)
+
+    startX = random.randrange(b.getxmax() - 1)
+    startY = random.randrange(b.getMaxY() - 1)
+
