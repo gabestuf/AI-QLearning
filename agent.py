@@ -1,13 +1,10 @@
-import node
-import math
-
+import numpy as np
+import random as random
 
 class Agent:
 	def __init__(self, board):
 		"""
 		Initialize the agent.
-		:param start: Start position on the board.
-		:param goal: Goal position on the board.
 		:param board: Board object.
 		"""
 		self.states = [] #position and action taken at that position
