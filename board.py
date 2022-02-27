@@ -15,10 +15,3 @@ class Board:
         newPos = ( randint(0, len(map)), randint(0, len(map[0])) )
         return newPos
 
-    def getxmax(self):
-        xmax = np.max(self.map, axis=0)
-        return xmax
-
-    def getymax(self):
-        ymax = np.max(self.map, axis=1)
-        return ymax
