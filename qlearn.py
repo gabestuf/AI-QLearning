@@ -1,5 +1,6 @@
 
 import argparse
+import random
 
 
 if __name__ == '__main__':
@@ -36,3 +37,18 @@ if __name__ == '__main__':
     # args = argparse.Namespace('board1.txt', 1.3, 0.9, -0.05)
 
     print('Command Arguments:', args)
+
+    # generate a board
+    rows = 5
+    cols = 5
+    percentOfNonZeroNumbers = 0.1
+    lowest = -1
+    highest = 1
+    generateBoard(1, rows, cols, percentOfNonZeroNumbers, lowest, highest)
+
+    # board class
+    b = Board(args.file)
+
+    startX = random.randrange(b.getxmax() - 1)
+    startY = random.randrange(b.getMaxY() - 1)
+
