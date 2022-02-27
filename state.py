@@ -1,29 +1,23 @@
 import numpy as np
 import random as random
-
+from board import Board
 class State:
-	def __init__(self, board):
-
+	def __init__(self, coord, board):
 		self.isEnd = False
-		self.state =(random.randint(0,49), random.randint(0,49)) 
-
-	def _chooseAction(self, action):
-		if action == "up":
-			return np.random.choice
+		self.coord = coord
+		self.val = board[coord[0], coord[1]]
 
 	def giveReward(self):
-		if self.state != 1:
+		if self.val == 1:
+			self.isEnd = True
 			return 1
-		elif self.state == -1:
+		elif self.val == -1:
+			self.isEnd = True
 			return -1
 		else:
 			return -0.4
 
-	def isEnd(self):
-		if(self.state == 1) or (self.state == -1):
-			self.isEnd = True
-
-	def _chooseMove(self,action):
+	def _chooseAction(self, action):	#Choose action with some probability
 		if action == "up":
 			return np.random.choice(["up","left","right"], p=[0.8,0.1,0.1])
 		if action == "down":
@@ -33,12 +27,16 @@ class State:
 		if action == "right":
 			return np.random.choice(["right", "up", "down"], p = [0.8,0.1,0.1])
 
-	def nextPosition(self,action):
-		action = self._chooseAction(action)
-		nextState = self.nextPosition(action)
+	def nextState(self,action): #Given an action, return the next state
+		action = self._chooseAction(action)	#Choose random action
+		nextCoord = self.nextState(action)	
 		#Check legal state
-		if(nextState[0] >= 0) and (nextState[0] <= 50):
-			if(nextState[1] >= 0) and (nextState[1] <= 50):
-				if(nextState != (1,1)):
-					return nextState
+		if(nextCoord[0] >= 0) and (nextCoord[0] <= 50):
+			if(nextCoord[1] >= 0) and (nextCoord[1] <= 50):
+				return nextCoord
 		return self.state
+
+	def isEnd(self):
+		if(self.val == 1 or self.val== -1):
+			self.isEnd = True
+		return True

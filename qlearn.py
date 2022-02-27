@@ -1,12 +1,9 @@
 
 import argparse
 
-from board import *
-from board_generator import generateBoard
-
 
 if __name__ == '__main__':
-
+        
     parser = argparse.ArgumentParser()
 
     parser.add_argument(
@@ -36,16 +33,6 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     # TESTING
+    # args = argparse.Namespace('board1.txt', 1.3, 0.9, -0.05)
 
     print('Command Arguments:', args)
-
-    # generate a board
-    rows = 5
-    cols = 5
-    percentOfNonZeroNumbers = 0.1
-    lowest = -1
-    highest = 1
-    generateBoard(1, rows, cols, percentOfNonZeroNumbers, lowest, highest)
-
-    # board class
-    b = Board(args.file)
