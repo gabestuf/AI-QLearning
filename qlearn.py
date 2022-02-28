@@ -15,7 +15,7 @@ if __name__ == '__main__':
     """
     
     # TESTING
-    args = ["qlearn.py","boards/board1.txt", 5, 0.9,-0.05]
+    args = ["qlearn.py","boards/board1.txt", 3, 0.9,-0.05]
 
     b = Board(args[1])
     time = args[2]
@@ -24,6 +24,7 @@ if __name__ == '__main__':
     #print('Command Arguments:', sys.argv)
     a = Agent(b,prob)
     a.qLearn(time,reward)
+    print(a.qVals)
 
 
 

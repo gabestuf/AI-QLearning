@@ -6,23 +6,23 @@ from state import State
 class Agent:
 	def __init__(self, board, prob):
 		self.states = [] #position and action taken at that position
-		self.moves = ["up","down","left","right"]						
+		self.actions = ["up","down","left","right"]						
 		self.qVals = {}
 		self.isEnd = False
 		self.prob = prob
 		self.board = board
 
-		#Agent starts at a radnom state
+		#Agent starts at a random state
 		randCoord = board.getRandomCoord()
 		self.state = State(randCoord, board)
 		while(self.state.isEnd):
 			self.state = State(board.getRandomCoord(board),board)
 
 		#Initializing Q table
-		for i in range(len(board.map)):
-			for j in range(len(board.map[0])):
+		for i in range(len(board.map)-1):
+			for j in range(len(board.map[0])-1):
 				self.qVals[(i,j)] = {}
-				for a in self.moves:
+				for a in self.actions:
 					self.qVals[(i,j)][a] = 0
 
 	def chooseAction(self):
@@ -30,10 +30,10 @@ class Agent:
 		maxNextReward = 0
 		action = ""
 
-		if np.random.uniform(0,1) <= 0.5: #Exploration
-			action = np.random.choice(self.moves)
+		if np.random.uniform(0,1) <= 0.3: #Exploration
+			action = np.random.choice(self.actions)
 		else:
-			for a in self.moves:	#Greedy
+			for a in self.actions:	#Greedy
 				currentPos = self.state.coord
 				nextReward = self.qVals[currentPos][a]
 				if nextReward >= maxNextReward:
@@ -58,14 +58,14 @@ class Agent:
 		while elapsedTime < seconds:
 			currentTime = time.time()
 			if self.state.isEnd:
-				reward = self.state.giveReward(reward)
-				for a in self.action:
-					self.qVal[self.state.coord][a] = reward
-				print("Game end Reward - ", reward)
+				newReward = self.state.giveReward(reward)
+				for a in self.actions:
+					self.qVals[self.state.coord][a] = newReward
+				print("Game end Reward - ", newReward)
 				for s in reversed(self.states):
-					current_q_value = self.qVal[s[0]][s[1]]
-					reward = current_q_value + 0.2 * (0.9 * reward - current_q_value)
-					self.qVal[s[0]][s[1]] = round(reward, 3)
+					current_q_value = self.qVals[s[0]][s[1]]
+					newReward = current_q_value + 0.2 * (0.9 * newReward - current_q_value)
+					self.qVals[s[0]][s[1]] = round(newReward, 3)
 				self.reset()
 				elapsedTime = currentTime - startTime
 			else:

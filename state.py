@@ -5,16 +5,13 @@ class State:
 	def __init__(self, coord, board):
 		self.isEnd = False
 		self.coord = coord
-		self.val = board.map[coord[0]][coord[1]]
+		self.val = int(board.map[coord[0]][coord[1]])
 		self.lucky = False
 
 	def giveReward(self,reward):
-		if self.val == 1:
+		if self.val != 0:
 			self.isEnd = True
-			return 1
-		elif self.val == -1:
-			self.isEnd = True
-			return -1
+			return self.val
 		else:
 			return reward
 
@@ -52,5 +49,5 @@ class State:
 		return self.coord
 
 	def isEndF(self):
-		if(self.val == 1 or self.val == -1):
+		if(self.val != 0):
 			self.isEnd = True
