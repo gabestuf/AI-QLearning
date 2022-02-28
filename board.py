@@ -12,8 +12,8 @@ class Board:
         self.map = map_array
 
     def getRandomCoord(self):
-        mX = len(self.map) - 1  #maximum value for X
-        mY = len(self.map[0]) - 1
+        mX = len(self.map)  #maximum value for X
+        mY = len(self.map[0])
         newPos = (randrange(0, mX), randrange(0, mY))
         return newPos
 

@@ -19,14 +19,15 @@ class Agent:
 			self.state = State(board.getRandomCoord(board),board)
 
 		#Initializing Q table
-		for i in range(len(board.map)-1):
-			for j in range(len(board.map[0])-1):
+		print(len(board.map) - 1)
+		print(len(board.map[0]) - 1)
+		for i in range(len(board.map)):
+			for j in range(len(board.map[0])):
 				self.qVals[(i,j)] = {}
 				for a in self.actions:
 					self.qVals[(i,j)][a] = 0
 
 	def chooseAction(self):
-		#Greedy choose action
 		maxNextReward = 0
 		action = ""
 
