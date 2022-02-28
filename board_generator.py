@@ -52,7 +52,7 @@ def write_board_to_file(file_name, board_string):
     f.close()
 
 
-def main():
+def generateBoard():
 
     print("Generating_Boards")
     for i in range(num_of_boards):
@@ -63,7 +63,5 @@ def main():
         write_board_to_file(fname, board_string)
 
 
-
-
 if __name__ == '__main__':
-    main()
+    generateBoard()
