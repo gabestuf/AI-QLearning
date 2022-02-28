@@ -11,6 +11,7 @@ class Agent:
 		self.qVals = {}
 		self.isEnd = False
 		self.prob = prob
+		self.board = board
 
 		#Agent starts at a radnom state
 		randCoord = board.getRandomCoord()
@@ -30,7 +31,9 @@ class Agent:
 		maxNextReward = 0
 		action = ""
 
-		for a in self.moves:
+		if np.random.uniform(0,1) <= 0.3: #Exploration
+			action = np.random.choice(self.moves)
+		for a in self.moves:	#Greedy
 			currentPos = self.state.coord
 			nextReward = self.qVals[currentPos][a]
 			if nextReward >= maxNextReward:
@@ -40,7 +43,7 @@ class Agent:
 
 	def takeAction(self, action):
 		coord = self.state.nextState(action, self.prob)
-		return State(state=coord)
+		return State(coord, self.board)
 
 	def reset(self):
 		self.states = []
@@ -70,7 +73,7 @@ class Agent:
 				self.states.append([(self.state.coord), action])
 				print("current position {} action {}".format(self.state.coord, action))
 				self.state = self.takeAction(action)
-				self.state.isEnd()
+				self.state.isEndF()
 				print("Next state - ", self.state.coord)
 				print("---------------------")
 				self.isEnd = self.state.isEnd

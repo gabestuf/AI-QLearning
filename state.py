@@ -5,8 +5,8 @@ class State:
 	def __init__(self, coord, board):
 		self.isEnd = False
 		self.coord = coord
-		print(type(coord[0]))
 		self.val = board.map[coord[0]][coord[1]]
+		self.lucky = False
 
 	def giveReward(self,reward):
 		if self.val == 1:
@@ -30,16 +30,27 @@ class State:
 		if action == "right":
 			return np.random.choice(["right", "up", "down"], p = [likely,unlikely,unlikely])
 
-	def nextState(self,action, prob): #Given an action, return the next state
-		action = self._chooseAction(action, prob)	#Choose random action
-		nextCoord = self.nextState(action, prob)	
+	def nextState(self,action, prob): #Given an action, return the next state(coordinate)
+		if self.lucky:
+			if action == "up":
+				nextCoord = (self.coord[0] - 1,self.coord[1])
+			elif action == "down":
+				nextCoord = (self.coord[0] + 1, self.coord[1])
+			elif action == "left":
+				nextCoord = (self.state[0], self.state[1])
+			else:
+				nextCoord = (self.coord[0], self.coord[1] + 1)
+			self.lucky = False
+		else:
+			action = self._chooseAction(action, prob)	#Choose random action
+			self.lucky = True
+			nextCoord = self.nextState(action, prob)	
 		#Check legal state
-		if(nextCoord[0] >= 0) and (nextCoord[0] <= 50):
-			if(nextCoord[1] >= 0) and (nextCoord[1] <= 50):
+		if(nextCoord[0] >= 0) and (nextCoord[0] < 50):
+			if(nextCoord[1] >= 0) and (nextCoord[1] < 50):
 				return nextCoord
-		return self.state
+		return self.coord
 
-	def isEnd(self):
+	def isEndF(self):
 		if(self.val == 1 or self.val== -1):
 			self.isEnd = True
-		return True

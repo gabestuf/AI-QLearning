@@ -1,6 +1,6 @@
 import numpy as np
 import csv
-from random import randint
+from random import randint, randrange
 
 
 class Board:
@@ -12,6 +12,8 @@ class Board:
         self.map = map_array
 
     def getRandomCoord(self):
-        newPos = ( randint(0, len(self.map)), randint(0, len(self.map[0])) )
+        mX = len(self.map) - 1  #maximum value for X
+        mY = len(self.map[0]) - 1
+        newPos = (randrange(0, mX), randrange(0, mY))
         return newPos
 
