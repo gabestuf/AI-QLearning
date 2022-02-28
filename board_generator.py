@@ -51,14 +51,14 @@ def write_board_to_file(file_name, board_string):
     f.write(board_string)
     f.close()
 
+def generateBoard():
 
-"""
-print("Generating_Boards")
+    print("Generating_Boards")
     for i in range(num_of_boards):
         board_array = []
         fname = "boards/board"+ str(i + 1)+ ".txt"
         updated_board = generate_numbers(board_array)
         board_string = board_to_string(updated_board)
         write_board_to_file(fname, board_string)
-"""
+
     
