@@ -1,6 +1,5 @@
 from tracemalloc import start
 import numpy as np
-import random as random
 import time as time
 from state import State
 
@@ -11,6 +10,7 @@ class Agent:
 		self.qVals = {}
 		self.isEnd = False
 		self.prob = prob
+		self.board = board
 
 		#Agent starts at a radnom state
 		randCoord = board.getRandomCoord()
@@ -30,17 +30,20 @@ class Agent:
 		maxNextReward = 0
 		action = ""
 
-		for a in self.moves:
-			currentPos = self.state.coord
-			nextReward = self.qVals[currentPos][a]
-			if nextReward >= maxNextReward:
-				action = a
-				maxNextReward = nextReward
+		if np.random.uniform(0,1) <= 0.5: #Exploration
+			action = np.random.choice(self.moves)
+		else:
+			for a in self.moves:	#Greedy
+				currentPos = self.state.coord
+				nextReward = self.qVals[currentPos][a]
+				if nextReward >= maxNextReward:
+					action = a
+					maxNextReward = nextReward
 		return action
 
 	def takeAction(self, action):
 		coord = self.state.nextState(action, self.prob)
-		return State(state=coord)
+		return State(coord, self.board)
 
 	def reset(self):
 		self.states = []
@@ -70,7 +73,7 @@ class Agent:
 				self.states.append([(self.state.coord), action])
 				print("current position {} action {}".format(self.state.coord, action))
 				self.state = self.takeAction(action)
-				self.state.isEnd()
+				self.state.isEndF()
 				print("Next state - ", self.state.coord)
 				print("---------------------")
 				self.isEnd = self.state.isEnd
