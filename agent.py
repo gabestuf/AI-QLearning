@@ -8,7 +8,7 @@ class Agent:
 	def __init__(self, board, prob):
 		self.states = [] #position and action taken at that position
 		self.moves = ["up","down","left","right"]						
-		self.qVal = {}
+		self.qVals = {}
 		self.isEnd = False
 		self.prob = prob
 
@@ -22,7 +22,7 @@ class Agent:
 		for i in range(len(board.map)):
 			for j in range(len(board.map[0])):
 				self.qVals[(i,j)] = {}
-				for a in self.actions:
+				for a in self.moves:
 					self.qVals[(i,j)][a] = 0
 
 	def chooseAction(self):

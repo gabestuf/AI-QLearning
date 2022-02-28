@@ -5,7 +5,8 @@ class State:
 	def __init__(self, coord, board):
 		self.isEnd = False
 		self.coord = coord
-		self.val = board[coord[0], coord[1]]
+		print(type(coord[0]))
+		self.val = board.map[coord[0]][coord[1]]
 
 	def giveReward(self,reward):
 		if self.val == 1:
@@ -31,7 +32,7 @@ class State:
 
 	def nextState(self,action, prob): #Given an action, return the next state
 		action = self._chooseAction(action, prob)	#Choose random action
-		nextCoord = self.nextState(action)	
+		nextCoord = self.nextState(action, prob)	
 		#Check legal state
 		if(nextCoord[0] >= 0) and (nextCoord[0] <= 50):
 			if(nextCoord[1] >= 0) and (nextCoord[1] <= 50):

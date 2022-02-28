@@ -1,45 +1,29 @@
 
+import sys
 import argparse
 import random
-from board import Board
-from agent import Agent
+import sys
+from agent import *
+from board import *
+
 
 if __name__ == '__main__':
-        
-    parser = argparse.ArgumentParser()
+    """
+    if len(sys.argv) != 5:
+        print('usage python qlearn.py [boardPath] [runTime] [probability] [reward]')
+        exit()
+    """
+    
+    # TESTING
+    args = ["qlearn.py","boards/board1.txt", 1.3, 0.9,-0.05]
 
-    parser.add_argument(
-        'file',
-        help="--file : The name of the file to read in representing the map",
-        type=str
-    )
-
-    parser.add_argument(
-        'seconds',
-        help="--seconds : How long to learn (in seconds)",
-        type=float
-    )
-
-    parser.add_argument(
-        'probability',
-        help="-- probability : The probability of moving in the desired direction upon taking an action",
-        type=float
-    )
-
-    parser.add_argument(
-        'reward',
-        help="--reward : The constant reward for each action. ",
-        type=float
-    )
-
-  
-    b = Board(args.file)
-    time = args.seconds
-    prob = args.probability
-    reward = args.reward
-
+    b = Board(args[1])
+    time = args[2]
+    prob = args[3]
+    reward = args[4]
+    #print('Command Arguments:', sys.argv)
     a = Agent(b,prob)
     a.qLearn(time,reward)
-    
+
 
 

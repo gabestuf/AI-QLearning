@@ -12,6 +12,6 @@ class Board:
         self.map = map_array
 
     def getRandomCoord(self):
-        newPos = ( randint(0, len(map)), randint(0, len(map[0])) )
+        newPos = ( randint(0, len(self.map)), randint(0, len(self.map[0])) )
         return newPos
 
