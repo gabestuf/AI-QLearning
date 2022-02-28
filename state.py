@@ -37,7 +37,7 @@ class State:
 			elif action == "down":
 				nextCoord = (self.coord[0] + 1, self.coord[1])
 			elif action == "left":
-				nextCoord = (self.state[0], self.state[1])
+				nextCoord = (self.coord[0], self.coord[1])
 			else:
 				nextCoord = (self.coord[0], self.coord[1] + 1)
 			self.lucky = False
@@ -52,5 +52,5 @@ class State:
 		return self.coord
 
 	def isEndF(self):
-		if(self.val == 1 or self.val== -1):
+		if(self.val == 1 or self.val == -1):
 			self.isEnd = True

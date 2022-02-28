@@ -24,7 +24,6 @@ if __name__ == '__main__':
     #print('Command Arguments:', sys.argv)
     a = Agent(b,prob)
     a.qLearn(time,reward)
-    print(a.qVals)
 
 
 

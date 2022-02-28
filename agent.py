@@ -1,6 +1,5 @@
 from tracemalloc import start
 import numpy as np
-import random as random
 import time as time
 from state import State
 
@@ -31,14 +30,15 @@ class Agent:
 		maxNextReward = 0
 		action = ""
 
-		if np.random.uniform(0,1) <= 0.3: #Exploration
+		if np.random.uniform(0,1) <= 0.5: #Exploration
 			action = np.random.choice(self.moves)
-		for a in self.moves:	#Greedy
-			currentPos = self.state.coord
-			nextReward = self.qVals[currentPos][a]
-			if nextReward >= maxNextReward:
-				action = a
-				maxNextReward = nextReward
+		else:
+			for a in self.moves:	#Greedy
+				currentPos = self.state.coord
+				nextReward = self.qVals[currentPos][a]
+				if nextReward >= maxNextReward:
+					action = a
+					maxNextReward = nextReward
 		return action
 
 	def takeAction(self, action):
