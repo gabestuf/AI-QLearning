@@ -2,27 +2,28 @@
 import sys
 import argparse
 import random
-
-from board_generator import generateBoard
+import sys
+from agent import *
 from board import *
 
 
 if __name__ == '__main__':
+    """
     if len(sys.argv) != 5:
-        print('usage python astar.py [boardPath] [runTime] [probability] [reward]')
+        print('usage python qlearn.py [boardPath] [runTime] [probability] [reward]')
         exit()
-
+    """
     
-
     # TESTING
-    # args = ["qlearn.py","boards/board1.txt", 1.3, 0.9,-0.05]
+    args = ["qlearn.py","boards/board1.txt", 1.3, 0.9,-0.05]
 
-    print('Command Arguments:', sys.argv)
+    b = Board(args[1])
+    time = args[2]
+    prob = args[3]
+    reward = args[4]
+    #print('Command Arguments:', sys.argv)
+    a = Agent(b,prob)
+    a.qLearn(time,reward)
 
-    # generate a board
-    # generateBoard()
-
-    # board class
-    b = Board(sys.argv[1])
 
 

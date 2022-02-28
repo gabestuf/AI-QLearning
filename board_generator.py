@@ -51,7 +51,6 @@ def write_board_to_file(file_name, board_string):
     f.write(board_string)
     f.close()
 
-
 def generateBoard():
 
     print("Generating_Boards")
@@ -62,6 +61,4 @@ def generateBoard():
         board_string = board_to_string(updated_board)
         write_board_to_file(fname, board_string)
 
-
-if __name__ == '__main__':
-    generateBoard()
+    
