@@ -31,10 +31,8 @@ class Agent:
 		maxNextReward = 0
 
 		if np.random.uniform(0,1) <= 0.3: #Exploration
-			action = "abc"
 			action = np.random.choice(self.actions)
 		else:
-			action = "efg"
 			for a in self.actions:	#Greedy
 				currentPos = self.state.coord
 				nextReward = self.qVals[currentPos][a]
@@ -42,7 +40,6 @@ class Agent:
 					action = a
 					maxNextReward = nextReward
 				if nextReward == 0:
-					action = "eee"
 					action = np.random.choice(self.actions)
 				if nextReward < maxNextReward:
 					action = np.random.choice(self.actions)
