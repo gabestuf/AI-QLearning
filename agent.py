@@ -81,5 +81,10 @@ class Agent:
 				print("Next state - ", self.state.coord)
 				print("---------------------")
 				self.isEnd = self.state.isEnd
-				elapsedTime = currentTime - startTime
+				elapsedTime = currentTime - startTime			
+									
+					
+
 			
+							
+							
