@@ -15,7 +15,7 @@ if __name__ == '__main__':
     """
     
     # TESTING
-    args = ["qlearn.py","boards/board10x10.txt", 3, 0.9,-0.05]
+    args = ["qlearn.py","boards/board10x10.txt", 5, 0.9,-0.05]
 
     b = Board(args[1])
     time = args[2]
