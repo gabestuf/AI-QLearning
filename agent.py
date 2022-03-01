@@ -40,6 +40,8 @@ class Agent:
 				if nextReward >= maxNextReward:
 					action = a
 					maxNextReward = nextReward
+				if nextReward == 0:
+					action = np.random.choice(self.actions)
 		return action
 
 	def takeAction(self, action):

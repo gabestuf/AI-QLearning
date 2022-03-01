@@ -6,7 +6,7 @@ class State:
 		self.isEnd = False
 		self.coord = coord
 		self.val = int(board.map[coord[0]][coord[1]])
-		self.lucky = False
+		self.determined = False
 		self.board = board
 
 	def giveReward(self,reward):
@@ -31,7 +31,7 @@ class State:
 	def nextState(self,action, prob): #Given an action, return the next state(coordinate)
 		mX = len(self.board.map)  #maximum value for X
 		mY = len(self.board.map[0])
-		if self.lucky:
+		if self.determined:
 			if action == "up":
 				nextCoord = (self.coord[0] - 1,self.coord[1])
 			elif action == "down":
@@ -40,10 +40,10 @@ class State:
 				nextCoord = (self.coord[0], self.coord[1])
 			else:
 				nextCoord = (self.coord[0], self.coord[1] + 1)
-			self.lucky = False
+			self.determined = False
 		else:
 			action = self._chooseAction(action, prob)	#Choose random action
-			self.lucky = True
+			self.determined = True
 			nextCoord = self.nextState(action, prob)	
 		#Check legal state
 		if(nextCoord[0] >= 0) and (nextCoord[0] < mX):
